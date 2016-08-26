@@ -5,7 +5,8 @@ pkg_version=0.1.3
 pkg_maintainer="Bill Meyer <bill@chef.io>"
 pkg_license=('Apache-2.0')
 pkg_source=https://github.com/billmeyer/national-parks
-pkg_deps=(core/tomcat8 core/git core/maven billmeyer/mongodb)
+pkg_deps=(core/tomcat8 billmeyer/mongodb)
+pkg_build_deps=(core/git core/maven)
 pkg_expose=(8080)
 pkg_svc_user="root"
 
