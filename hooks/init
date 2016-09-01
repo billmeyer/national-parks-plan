@@ -12,4 +12,21 @@ echo "\$MONGOIMPORT_OPTS=$MONGOIMPORT_OPTS"
 # billmeyer/mongodb requirement to run mongoimport properly :
 ln -s $(hab pkg path core/glibc)/lib/ld-2.22.so /lib/ld-linux-x86-64.so.2 2>/dev/null
 
-${MONGODB_HOME}/bin/mongoimport --drop -d demo -c nationalparks --type json --jsonArray --file $(hab pkg path ${HAB_ORIGIN}/national-parks)/national-parks.json ${MONGOIMPORT_OPTS}
+echo "sys.ip        = {{sys.ip}}"
+echo "sys.hostname  = {{sys.hostname}}"
+echo "pkg.origin    = {{pkg.origin}}"
+echo "pkg.name      = {{pkg.name}}"
+echo "pkg.version   = {{pkg.version}}"
+echo "pkg.release   = {{pkg.release}}"
+echo "pkg.ident     = {{pkg.ident}}"
+echo "pkg.deps      = {{pkg.deps}}"
+echo "pkg.exposes   = {{pkg.exposes}}"
+echo "pkg.svc_path          = {{pkg.svc_path}}"
+echo "pkg.svc_config_path   = {{pkg.svc_config_path}}"
+echo "pkg.svc_data_path     = {{pkg.svc_data_path}}"
+echo "pkg.svc_files_path    = {{pkg.svc_files_path}}"
+echo "pkg.svc_static_path   = {{pkg.svc_static_path}}"
+echo "pkg.svc_var_path      = {{pkg.svc_var_path}}"
+
+echo ${MONGODB_HOME}/bin/mongoimport --drop -d demo -c nationalparks --type json --jsonArray --file $(hab pkg path {{pkg.origin}}/national-parks)/national-parks.json ${MONGOIMPORT_OPTS}
+${MONGODB_HOME}/bin/mongoimport --drop -d demo -c nationalparks --type json --jsonArray --file $(hab pkg path {{pkg.origin}}/national-parks)/national-parks.json ${MONGOIMPORT_OPTS}
