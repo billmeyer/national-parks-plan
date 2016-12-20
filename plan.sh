@@ -68,7 +68,7 @@ do_install()
     cp ${source_dir}/target/${pkg_filename}.war ${webapps_dir}/
 
     # Copy our seed data so that it can be loaded into Mongo using our init hook
-    cp ${source_dir}/national-parks.json $(hab pkg path ${pkg_origin}/national-parks)/
+    cp -v ${source_dir}/national-parks.json ${PREFIX}/
 }
 
 # We verify our own source code because we cloned from GitHub instead of
