@@ -4,13 +4,10 @@ exec 2>&1
 
 echo "Seeding Mongo Collection"
 
-MONGODB_HOME=$(hab pkg path billmeyer/mongodb)
+MONGODB_HOME=$(hab pkg path core/mongo-tools)
 
 source {{pkg.svc_config_path}}/mongoimport-opts.conf
 echo "\$MONGOIMPORT_OPTS=$MONGOIMPORT_OPTS"
-
-# billmeyer/mongodb requirement to run mongoimport properly :
-ln -s $(hab pkg path core/glibc)/lib/ld-2.22.so /lib/ld-linux-x86-64.so.2 2>/dev/null
 
 echo "sys.ip        = {{sys.ip}}"
 echo "sys.hostname  = {{sys.hostname}}"
