@@ -1,0 +1,23 @@
+version: '2'
+services:
+  mongo:
+    image: core/mongodb:latest
+    hostname: "mongodb"
+    environment:
+      HAB_MONGODB: "[mongod.net]\nbind_ip = '0.0.0.0'\n[mongod.security]\ncluster_auth_mode = ''"
+  national-parks:
+    image: billmeyer/national-parks:latest
+    links:
+      - mongo:mongodb
+    command: --peer mongodb --bind database:mongodb.default
+  haproxy:
+    image: mfdii/haproxy:latest
+    ports: 
+      - "8080:8080"
+      - "9631:9631"
+      - "9000:9000"
+    links:
+      - national-parks:np
+    environment:
+      HAB_HAPROXY: "bind = '*:8080'"
+    command: --peer np --bind backend:national-parks.default
