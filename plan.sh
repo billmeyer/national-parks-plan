@@ -9,6 +9,9 @@ pkg_deps=(core/tomcat8 core/jdk8 core/mongo-tools)
 pkg_build_deps=(core/git core/maven)
 pkg_expose=(8080)
 pkg_svc_user="root"
+pkg_binds=(
+  [database]="port"
+)
 
 # Override do_download() to pull our source code from GitHub instead
 # of downloading a tarball from a URL.
